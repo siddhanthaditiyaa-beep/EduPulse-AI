@@ -1,0 +1,22 @@
+# Node
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+
+# Python
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
+backend/.pytest_cache/
+backend/venv/
+backend/.venv/
+
+# Database (auto-created & seeded on first run)
+backend/*.db
+
+# Env
+.env
+backend/.env
+
+# OS
+.DS_Store

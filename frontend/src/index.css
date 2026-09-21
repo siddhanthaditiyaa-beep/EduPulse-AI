@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+
+/*
+  EduPulse AI — design tokens
+  Warm, high-contrast, plain-language UI built for two audiences who are
+  new to software: school-age learners and older adults. Every choice below
+  favors legibility and unambiguous labeling over density or trendiness.
+*/
+@theme {
+  --font-display: 'Baloo 2', ui-rounded, 'Segoe UI', sans-serif;
+  --font-body: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream: #fff8ec;
+  --color-cream-soft: #fdf0da;
+  --color-paper: #fffdf8;
+
+  --color-ink: #2a2340;
+  --color-ink-soft: #675f7d;
+  --color-ink-faint: #9791a8;
+
+  --color-ocean-50: #eaf3f8;
+  --color-ocean-100: #cfe4ee;
+  --color-ocean-500: #2f6690;
+  --color-ocean-600: #234c6b;
+  --color-ocean-700: #1b3a52;
+
+  --color-sun-100: #ffe6cf;
+  --color-sun-400: #ff9c52;
+  --color-sun-500: #ff8a3d;
+  --color-sun-600: #e96f22;
+
+  --color-meadow-100: #d9f2ea;
+  --color-meadow-500: #2fa792;
+  --color-meadow-600: #228473;
+
+  --color-coral-100: #fde1e0;
+  --color-coral-500: #e8555b;
+  --color-coral-600: #cc3d43;
+
+  --color-berry-100: #ece2f7;
+  --color-berry-500: #8b5fbf;
+  --color-berry-600: #6f45a0;
+
+  --color-gold-400: #ffc93c;
+  --color-gold-500: #f5b100;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    /* A larger base size than the usual 16px default — the whole app
+       reads more comfortably for readers who don't zoom their browser. */
+    font-size: 18px;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    line-height: 1.2;
+  }
+  /* Visible, generous focus ring everywhere — mouse users never see it,
+     keyboard and switch-device users always do. */
+  :focus-visible {
+    outline: 3px solid var(--color-ocean-500);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream-soft);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ocean-100);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ocean-500);
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-pop-in {
+  animation: pop-in 0.25s ease-out both;
+}

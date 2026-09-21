@@ -1,0 +1,28 @@
+{
+  "best_model": "Linear Regression",
+  "features": [
+    "diagnostic_score",
+    "quiz_average",
+    "overall_mastery",
+    "total_study_hours",
+    "total_attempts",
+    "study_streak"
+  ],
+  "metrics": {
+    "Linear Regression": {
+      "MAE": 2.68,
+      "RMSE": 3.428,
+      "R2": 0.8944
+    },
+    "Random Forest Regressor": {
+      "MAE": 2.839,
+      "RMSE": 3.633,
+      "R2": 0.8814
+    },
+    "XGBoost Regressor": {
+      "MAE": 2.785,
+      "RMSE": 3.548,
+      "R2": 0.8869
+    }
+  }
+}
