@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
+import { Mail, Lock, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
 import { AuthLayout } from '../components/AuthLayout';
 import { Field, inputClass, Button } from '../components/ui/Kit';
+
+const DEMO_EMAIL = 'demo@edupulse.ai';
+const DEMO_PASSWORD = 'Demo@1234';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -29,8 +32,23 @@ export const Login = () => {
     }
   };
 
+  const handleFillDemo = () => {
+    setError('');
+    setEmail(DEMO_EMAIL);
+    setPassword(DEMO_PASSWORD);
+  };
+
   return (
     <AuthLayout title="Welcome back!" subtitle="Sign in to keep learning with EduPulse AI">
+      <button
+        type="button"
+        onClick={handleFillDemo}
+        className="w-full mb-6 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-dashed border-sun-500/50 bg-sun-100 text-sun-600 font-bold text-sm hover:bg-sun-100/70 transition cursor-pointer"
+      >
+        <Sparkles className="w-4 h-4" />
+        Just want to look around? Fill in the demo account
+      </button>
+
       {error && (
         <div className="mb-6 p-4 rounded-2xl bg-coral-100 text-coral-600 text-base font-semibold flex items-start gap-2.5">
           <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
