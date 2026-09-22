@@ -11,6 +11,12 @@ class AIService:
         self.api_key = settings.GROQ_API_KEY or os.getenv("GROQ_API_KEY", "")
         self.model = settings.GROQ_MODEL
         self.client = None
+        # Diagnostic: always logs, regardless of whether the key was found,
+        # so deploy logs make it obvious what the app actually sees.
+        logger.info(
+            f"GROQ_API_KEY check -> present: {bool(self.api_key)}, "
+            f"length: {len(self.api_key)}, model: {self.model}"
+        )
         if self.api_key:
             try:
                 from groq import Groq
