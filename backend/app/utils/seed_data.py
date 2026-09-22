@@ -1,11 +1,51 @@
 import logging
 from sqlalchemy.orm import Session
 from backend.app.models.academic import Subject, Topic, LearningMaterial, Question
+from backend.app.models.user import User
+from backend.app.models.profile import StudentProfile
+from backend.app.auth.security import get_password_hash
 
 logger = logging.getLogger("edupulse.seed")
 
+DEMO_EMAIL = "demo@edupulse.ai"
+DEMO_PASSWORD = "Demo@1234"
+
+
+def seed_demo_account_if_missing(db: Session):
+    """Ensure a fixed demo account always exists, even after the free-tier
+    database resets. Lets you demo the app with the same login every time
+    instead of re-registering."""
+    existing = db.query(User).filter(User.email == DEMO_EMAIL).first()
+    if existing:
+        return
+
+    logger.info("Seeding demo account (%s)...", DEMO_EMAIL)
+    demo_user = User(
+        name="Demo Student",
+        email=DEMO_EMAIL,
+        password_hash=get_password_hash(DEMO_PASSWORD),
+    )
+    db.add(demo_user)
+    db.commit()
+    db.refresh(demo_user)
+
+    demo_profile = StudentProfile(
+        user_id=demo_user.id,
+        education_level="Undergraduate (B.Tech / BCA / B.Sc)",
+        learning_goal="Semester Exam Preparation",
+        preferred_difficulty="medium",
+        daily_study_target=45,
+        xp_points=50,
+        streak_days=1,
+    )
+    db.add(demo_profile)
+    db.commit()
+
+
 def seed_database_if_empty(db: Session):
     """Seed comprehensive DBMS curriculum, learning materials, and practice questions."""
+    seed_demo_account_if_missing(db)
+
     existing_subject = db.query(Subject).filter(Subject.name == "Database Management Systems (DBMS)").first()
     if existing_subject:
         return
